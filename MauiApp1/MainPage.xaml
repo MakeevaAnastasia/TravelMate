@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.MainPage" x:Name="_TravelPage_"
+             x:DataType="local:MainPage" Title="TravelMate"
+             BackgroundColor="#F3F8FA" Shell.NavBarIsVisible="False">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#193C49" />
+            <Setter Property="FontFamily" Value="OpenSansRegular" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="LineBreakMode" Value="WordWrap" />
+        </Style>
+        <Style x:Key="SectionTitle" TargetType="Label">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="#193C49" />
+        </Style>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="Stroke" Value="#DDEBED" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 20" />
+            <Setter Property="Padding" Value="18" />
+        </Style>
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="#193C49" />
+            <Setter Property="PlaceholderColor" Value="#627B85" />
+            <Setter Property="BackgroundColor" Value="#F3F8FA" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="MinimumHeightRequest" Value="48" />
+        </Style>
+        <Style TargetType="Editor">
+            <Setter Property="TextColor" Value="#193C49" />
+            <Setter Property="PlaceholderColor" Value="#627B85" />
+            <Setter Property="BackgroundColor" Value="#F3F8FA" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="Picker">
+            <Setter Property="TextColor" Value="#193C49" />
+            <Setter Property="TitleColor" Value="#627B85" />
+            <Setter Property="BackgroundColor" Value="#F3F8FA" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="RadioButton">
+            <Setter Property="TextColor" Value="#193C49" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="MinimumHeightRequest" Value="48" />
+        </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="TextColor" Value="#193C49" />
+            <Setter Property="BackgroundColor" Value="#F3F8FA" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="Switch">
+            <Setter Property="ThumbColor" Value="White" />
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="16" />
+            <Setter Property="MinimumHeightRequest" Value="52" />
+            <Setter Property="Padding" Value="12,14" />
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView x:Name="_MainScroll_" Orientation="Vertical">
+        <VerticalStackLayout x:Name="_ContentStack_" Padding="18,24,18,32" Spacing="18" MaximumWidthRequest="600" HorizontalOptions="Fill">
+            <Border x:Name="_HeroCard_" StrokeThickness="0" StrokeShape="RoundRectangle 24" BackgroundColor="#DCF3F3" Padding="20">
+                <VerticalStackLayout x:Name="_HeroStack_" Spacing="10">
+                    <Label x:Name="_BrandLabel_" Text="TravelMate" FontSize="32" FontAttributes="Bold" TextColor="#087F8C" />
+                    <Label x:Name="_SubtitleLabel_" Text="Спланируйте путешествие своей мечты" FontSize="17" FontAttributes="None" />
+                    <Image x:Name="_TravelImage_" Source="travel_scene.png" Aspect="AspectFit" HeightRequest="150" SemanticProperties.Description="Море, солнце, пальма и чемодан — навстречу путешествиям" />
+                    <Label x:Name="_HeroNote_" Text="Ваша идея отдыха начинается здесь" TextColor="#38636E" />
+                </VerticalStackLayout>
+            </Border>
+            <Border x:Name="_TravelerCard_" Style="{StaticResource Card}">
+                <VerticalStackLayout x:Name="_TravelerStack_" Spacing="12">
+                    <Label x:Name="_TravelerHeading_" Text="01 · О путешественнике" Style="{StaticResource SectionTitle}" />
+                    <Label x:Name="_RequiredHint_" Text="* Обязательные поля" FontSize="12" TextColor="#627B85" />
+                    <Label x:Name="_NameLabel_" Text="Ваше имя *" />
+                    <Entry x:Name="_NameEntry_" Placeholder="Как к вам обращаться?" Keyboard="Text" MaxLength="60" TextChanged="OnFormChanged" ReturnType="Next" />
+                    <Label x:Name="_BudgetLabel_" Text="Бюджет на путешествие, ₽ *" />
+                    <Entry x:Name="_BudgetEntry_" Placeholder="Например, 120 000" Keyboard="Numeric" MaxLength="18" TextChanged="OnFormChanged" ReturnType="Done" />
+                    <Label x:Name="_ReadyLabel_" Text="Анкета готова к просмотру" TextColor="#087F68" FontAttributes="Bold" IsVisible="False" />
+                </VerticalStackLayout>
+            </Border>
+            <Border x:Name="_HolidayCard_" Style="{StaticResource Card}">
+                <VerticalStackLayout x:Name="_HolidayStack_" Spacing="12">
+                    <Label x:Name="_HolidayHeading_" Text="02 · Ваш отдых" Style="{StaticResource SectionTitle}" />
+                    <Label x:Name="_CountryLabel_" Text="Куда отправимся?" />
+                    <Picker x:Name="_CountryPicker_" Title="Выберите страну" SelectedIndex="-1" SelectedIndexChanged="OnFormChanged">
+                        <Picker.Items>
+                            <x:String>Турция</x:String>
+                            <x:String>Египет</x:String>
+                            <x:String>Таиланд</x:String>
+                            <x:String>ОАЭ</x:String>
+                        </Picker.Items>
+                    </Picker>
+                    <Label x:Name="_HolidayTypeLabel_" Text="Какой отдых вам ближе?" FontAttributes="Bold" />
+                    <VerticalStackLayout x:Name="_RadioStack_" Spacing="0">
+                        <RadioButton x:Name="_BeachRadio_" Content="Пляжный" GroupName="HolidayType" Value="Пляжный" IsChecked="False" CheckedChanged="OnFormChanged" />
+                        <RadioButton x:Name="_SightseeingRadio_" Content="Экскурсионный" GroupName="HolidayType" Value="Экскурсионный" IsChecked="False" CheckedChanged="OnFormChanged" />
+                        <RadioButton x:Name="_ActiveRadio_" Content="Активный" GroupName="HolidayType" Value="Активный" IsChecked="False" CheckedChanged="OnFormChanged" />
+                    </VerticalStackLayout>
+                    <BoxView x:Name="_HolidayDivider_" HeightRequest="1" Color="#DDEBED" />
+                    <Grid x:Name="_ExtrasGrid_" RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="48,*" RowSpacing="8">
+                        <CheckBox x:Name="_ExcursionsCheck_" Grid.Row="0" Grid.Column="0" IsChecked="False" Color="#087F8C" CheckedChanged="OnFormChanged" SemanticProperties.Description="Хочу экскурсии" />
+                        <Label x:Name="_ExcursionsLabel_" Grid.Row="0" Grid.Column="1" Text="Хочу экскурсии" VerticalOptions="Center" />
+                        <CheckBox x:Name="_MealsCheck_" Grid.Row="1" Grid.Column="0" IsChecked="False" Color="#087F8C" CheckedChanged="OnFormChanged" SemanticProperties.Description="Нужно питание в отеле" />
+                        <Label x:Name="_MealsLabel_" Grid.Row="1" Grid.Column="1" Text="Нужно питание в отеле" VerticalOptions="Center" />
+                        <Switch x:Name="_AllInclusiveSwitch_" Grid.Row="2" Grid.Column="0" IsToggled="False" OnColor="#087F8C" Toggled="OnFormChanged" SemanticProperties.Description="Всё включено" />
+                        <Label x:Name="_AllInclusiveLabel_" Grid.Row="2" Grid.Column="1" Text="Всё включено" VerticalOptions="Center" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+            <Border x:Name="_DetailsCard_" Style="{StaticResource Card}">
+                <VerticalStackLayout x:Name="_DetailsStack_" Spacing="12">
+                    <Label x:Name="_DetailsHeading_" Text="03 · Детали поездки" Style="{StaticResource SectionTitle}" />
+                    <Label x:Name="_StartDateLabel_" Text="Дата начала поездки" />
+                    <DatePicker x:Name="_StartDatePicker_" Format="dd.MM.yyyy"
+                                MinimumDate="{Binding Source={x:Reference _TravelPage_}, Path=EarliestTravelDate, Mode=OneWay}"
+                                MaximumDate="{Binding Source={x:Reference _TravelPage_}, Path=LatestTravelDate, Mode=OneWay}"
+                                Date="{Binding Source={x:Reference _TravelPage_}, Path=InitialTravelDate, Mode=OneWay}" DateSelected="OnFormChanged" />
+                    <Grid x:Name="_DurationGrid_" RowDefinitions="Auto" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Label x:Name="_DurationLabel_" Grid.Row="0" Grid.Column="0" Text="Длительность" VerticalOptions="Center" />
+                        <Label x:Name="_DurationValueLabel_" Grid.Row="0" Grid.Column="1" FontAttributes="Bold" TextColor="#087F8C"
+                               Text="{Binding Source={x:Reference _DurationSlider_}, Path=Value, Mode=OneWay, StringFormat='Дней: {0:0}', x:DataType=Slider}" />
+                    </Grid>
+                    <Slider x:Name="_DurationSlider_" Minimum="1" Maximum="30" Value="7" ValueChanged="OnDurationChanged" MinimumTrackColor="#087F8C" MaximumTrackColor="#DDEBED" ThumbColor="#087F8C" SemanticProperties.Description="Длительность поездки от 1 до 30 дней" />
+                    <Label x:Name="_DurationHint_" Text="От короткого уикенда до месяца приключений" FontSize="12" TextColor="#627B85" />
+                    <Label x:Name="_WishesLabel_" Text="Ваши пожелания" />
+                    <Editor x:Name="_WishesEditor_" Placeholder="Отель рядом с пляжем, вид на море…" AutoSize="TextChanges" MaxLength="500" MinimumHeightRequest="110" TextChanged="OnFormChanged" />
+                </VerticalStackLayout>
+            </Border>
+            <Label x:Name="_ValidationLabel_" Text="" TextColor="#A13325" FontAttributes="Bold" IsVisible="False" />
+            <VerticalStackLayout x:Name="_ActionsStack_" Spacing="10">
+                <Button x:Name="_SubmitButton_" Text="Показать результат" Clicked="OnSubmitClicked" BackgroundColor="#087F8C" TextColor="White" />
+                <Button x:Name="_ClearButton_" Text="Очистить" Clicked="OnClearClicked" BackgroundColor="#E2EFF2" TextColor="#193C49" />
+            </VerticalStackLayout>
+            <Border x:Name="_ResultCard_" IsVisible="False" BackgroundColor="#E7F6F1" Stroke="#A6D8C8" StrokeShape="RoundRectangle 20" Padding="20">
+                <VerticalStackLayout x:Name="_ResultStack_" Spacing="14">
+                    <Label x:Name="_ResultHeading_" Text="Ваше путешествие" FontSize="23" FontAttributes="Bold" TextColor="#087F68" />
+                    <Label x:Name="_ResultLabel_" Text="" FontSize="16" LineHeight="1.4" />
+                    <Label x:Name="_ResultFootnote_" Text="Пусть путешествие станет хорошей историей!" TextColor="#38636E" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

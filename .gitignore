@@ -1,0 +1,55 @@
+# .NET / MAUI build output
+[Bb]in/
+[Oo]bj/
+.vs/
+.verification/
+artifacts/
+TestResults/
+
+# Local IDE settings
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.idea/
+.vscode/*.local.json
+
+# Logs, temporary files, and caches
+*.log
+*.tmp
+*.temp
+*.bak
+*.cache
+~$*
+.DS_Store
+Thumbs.db
+
+# Generated application packages
+*.apk
+*.aab
+*.apks
+*.ipa
+*.appx
+*.appxbundle
+*.msix
+*.msixbundle
+*.msixupload
+*.appxupload
+
+# Local secrets and application signing material
+.env
+.env.*
+!.env.example
+!.env.sample
+secrets.json
+appsettings.*.local.json
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.key
+*.pem
+*.mobileprovision
+*.provisionprofile
+id_rsa
+id_ed25519
